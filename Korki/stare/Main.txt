@@ -7,7 +7,7 @@ public class Main {
         boolean dzialaj = true;
         Scanner mojSkaner = new Scanner(System.in);
         Scanner czyDzialac = new Scanner(System.in);
-        System.out.println("Program będzie obsługiwał kalendarz tygodniowy spotkań.");
+        System.out.println("Program będzie obsługiwał kalendarz tygodniowy aktywnosci.");
         System.out.println("Podaj liczbę dni:");
         int liczbaDni = mojSkaner.nextInt();
         Kalendarz kalendarz = new Kalendarz();
@@ -23,24 +23,10 @@ public class Main {
                 case "a" -> dodajSpotkanie(mojSkaner, kalendarz);
                 case "b" -> usunSpotkanie(mojSkaner, kalendarz);
                 case "c" -> wyswietlSpotkania(mojSkaner, kalendarz);
-                case "d" -> testZadanie();
                 case "x" -> dzialaj = false;
                 default -> System.out.println("Nieobsługiwana opcja");
             }
         }
-    }
-    private static void testZadanie() {
-        LocalTime najwczesniejsza = Zadanie.getNajwczesniejsza();
-        LocalTime start = LocalTime.of(12,0,0);
-        LocalTime stop = LocalTime.of(12,30,0);
-        boolean bladGodzin = zwrocBladGodzin(start, stop, najwczesniejsza);
-        if (bladGodzin) {
-            System.out.println("Nieprawidłowo wypełnione dane");
-            return;
-        }
-        Zadanie zadanie = new Zadanie("zadanie1", start, stop, "normalny");
-        String drukuj = zadanie.toString();
-        System.out.println(zadanie);
     }
     private static void wyswietlSpotkania(Scanner mojSkaner, Kalendarz kalendarz) {
         int dzien = zwrocDzien(mojSkaner);
@@ -89,7 +75,7 @@ public class Main {
         System.out.println("d) Test zadanie");
         System.out.println("x) Exit");
     }
-    private static void dodajSpotkanie(Scanner mojSkaner, Kalendarz kalendarz) {
+    private static void dodajAktywnosc(Scanner mojSkaner, Kalendarz kalendarz) {
         int dzien = zwrocDzien(mojSkaner);
         boolean bladDnia = zwrocBladDnia(dzien, kalendarz);
         LocalTime godzinaRozpoczecia = zwrocGodzine(mojSkaner);
@@ -97,6 +83,9 @@ public class Main {
         LocalTime godzinaZakonczenia = zwrocGodzine(mojSkaner);
         boolean bladGodzin = zwrocBladGodzin(godzinaRozpoczecia, godzinaZakonczenia, najwczesniejsza);
         String opis  = zwrocOpis();
+
+    }
+    private static void dodajSpotkanie(Scanner mojSkaner, Kalendarz kalendarz) {
         int priorytet = zwrocPriorytet(mojSkaner);
         boolean bladPriorytetu = zwrocBladPriorytetu(priorytet);
         if (bladDnia || bladGodzin || bladPriorytetu) {

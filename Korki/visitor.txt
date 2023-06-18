@@ -1,0 +1,66 @@
+// https://refactoring.guru/design-patterns/visitor
+
+
+interface ZwierzeVisitor {
+	void visit(Pies pies);
+	void visit(Kot kot);
+	void visit(Krowa krowa);
+
+}
+
+Zwierze {
+	void accept(ZwierzeVisitor visitor) {
+		visitor.visit(this);
+	}
+}
+
+Pies extends Zwierze {
+	String hau() {
+		return "Hau hau";
+	}
+
+	void accept(ZwierzeVisitor visitor) {
+		visitor.visit(this);
+	}
+}
+
+Kot extends Zwierze {
+	String miau() {
+		return "Miau miau";
+	}
+
+	void accept(ZwierzeVisitor visitor) {
+		visitor.visit(this);
+	}
+}
+
+Krowa extends Zwierze {
+	String mu() {
+		return "Muu muu";
+	}
+
+	void accept(ZwierzeVisitor visitor) {
+		visitor.visit(this);
+	}
+}
+
+List<Zwierze>
+
+
+
+
+class ZwierzeVisitorBezKrowZbierajacyGlosy implements ZwierzeVisitor {
+	List<String> glosy = new ArrayList<>();
+
+	void visit(Pies pies) {
+		glosy.add(pies.hau());
+	}
+
+	void visit(Kot kot) {
+		glosy.add(kot.miau());
+	}
+
+	void visit(Krowa krowa) {
+		// nic nie robimy
+	}
+}
